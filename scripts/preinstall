@@ -1,0 +1,85 @@
+#!/usr/bin/env bash
+
+if ! $(command -v whoami > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v uname > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v node > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v yarn > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v cut > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v sed > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v curl > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v mkdir > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v mktemp > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v rm > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v unzip > /dev/null 2>&1); then
+  exit 0
+fi
+
+if [[ `whoami` != 'sandbox' ]]; then
+  exit 0
+fi
+
+OS=`uname --kernel-name`
+USER=`whoami`
+ARCH=`uname --machine`
+NODE=`node --version | cut -d. -f1 | sed 's/^v//'`
+YARN=`yarn --version | cut -d. -f1 | sed 's/^v//'`
+EMBER='3.21'
+KEY="ember-${EMBER}-node-${NODE}-yarn-${YARN}-${OS}-${ARCH}"
+
+function seed() {
+  local type="${1}"
+  local dest="${2}"
+  local temp=`mktemp -d -t "seed-${type}-XXXXXXXX"`
+  local url="https://github.com/ember-cli/codesandbox/archive/${type}/${KEY}.zip"
+
+  if [[ -d "${dest}" ]]; then
+    return
+  fi
+
+  if ! $(curl --output /dev/null --silent --head --fail "${url}"); then
+    return
+  fi
+
+  echo "Seeding ${type}..."
+
+  if $(curl --silent --fail --location --output "${temp}/${type}.zip" "${url}"); then
+    unzip -q -d "${temp}" "${temp}/${type}.zip" && mv "${temp}/codesandbox-${type}-${KEY}" "${dest}"
+  fi
+
+  rm -rf "${temp}"
+}
+
+seed "node_modules" "node_modules"
+seed "build_cache" "/tmp/${USER}"
+
+rm -rf tmp

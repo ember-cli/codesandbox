@@ -11,6 +11,8 @@
     "test": "tests"
   },
   "scripts": {
+    "preinstall": "bash ./scripts/preinstall || true",
+    "postinstall": "bash ./scripts/postinstall || true",
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:hbs": "ember-template-lint .",
@@ -31,7 +33,7 @@
     "ember-cli-babel": "^7.22.1",
     "ember-cli-dependency-checker": "^3.2.0",
     "ember-cli-htmlbars": "^5.3.1",
-    "ember-cli-inject-live-reload": "^2.0.2",
+    "ember-cli-inject-live-reload": "2.0.1",
     "ember-cli-sri": "^2.1.1",
     "ember-cli-terser": "^4.0.0",
     "ember-data": "~3.21.0",
