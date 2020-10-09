@@ -24,11 +24,11 @@ if ! $(command -v sed > /dev/null 2>&1); then
   exit 0
 fi
 
-if ! $(command -v curl > /dev/null 2>&1); then
+if ! $(command -v find > /dev/null 2>&1); then
   exit 0
 fi
 
-if ! $(command -v mkdir > /dev/null 2>&1); then
+if ! $(command -v touch > /dev/null 2>&1); then
   exit 0
 fi
 
@@ -36,11 +36,19 @@ if ! $(command -v mktemp > /dev/null 2>&1); then
   exit 0
 fi
 
-if ! $(command -v rm > /dev/null 2>&1); then
+if ! $(command -v curl > /dev/null 2>&1); then
   exit 0
 fi
 
-if ! $(command -v unzip > /dev/null 2>&1); then
+if ! $(command -v tar > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v mv > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v rm > /dev/null 2>&1); then
   exit 0
 fi
 
@@ -53,14 +61,23 @@ USER=`whoami`
 ARCH=`uname --machine`
 NODE=`node --version | cut -d. -f1 | sed 's/^v//'`
 YARN=`yarn --version | cut -d. -f1 | sed 's/^v//'`
-EMBER='3.21'
+EMBER="3.21"
+MTIME="2020-10-08 00:00:00.000000000 +0000"
 KEY="ember-${EMBER}-node-${NODE}-yarn-${YARN}-${OS}-${ARCH}"
+
+function ensure_mtime() {
+  local dir="${1}"
+
+  if [[ -d "${dir}" ]]; then
+    find "${dir}" -exec touch -d "${MTIME}" {} \;
+  fi
+}
 
 function seed() {
   local type="${1}"
   local dest="${2}"
   local temp=`mktemp -d -t "seed-${type}-XXXXXXXX"`
-  local url="https://github.com/ember-cli/codesandbox/archive/${type}/${KEY}.zip"
+  local url="https://github.com/ember-cli/codesandbox/archive/${type}/${KEY}.tar.gz"
 
   if [[ -d "${dest}" ]]; then
     return
@@ -72,14 +89,18 @@ function seed() {
 
   echo "Seeding ${type}..."
 
-  if $(curl --silent --fail --location --output "${temp}/${type}.zip" "${url}"); then
-    unzip -q -d "${temp}" "${temp}/${type}.zip" && mv "${temp}/codesandbox-${type}-${KEY}" "${dest}"
+  if $(curl --silent --fail --location --output "${temp}/${type}.tar.gz" "${url}"); then
+    tar -C "${temp}" -xzf "${temp}/${type}.tar.gz" && \
+      mv "${temp}/codesandbox-${type}-${KEY}" "${dest}" && \
+      ensure_mtime "${dest}"
   fi
 
   rm -rf "${temp}"
 }
 
+if [[ ! -d ".git" && ! -d "dist" && ! -d "tmp" && ! -d "node_modules" && ! -d "/tmp/${USER}" ]]; then
+  ensure_mtime "."
+fi
+
 seed "node_modules" "node_modules"
 seed "build_cache" "/tmp/${USER}"
-
-rm -rf tmp
