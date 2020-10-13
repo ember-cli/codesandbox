@@ -1,0 +1,84 @@
+{
+  "name": "ember-template-recast",
+  "version": "4.2.0",
+  "description": "Non-destructive template transformer.",
+  "keywords": [
+    "codemod",
+    "ember",
+    "glimmer",
+    "handlebars",
+    "recast",
+    "templates"
+  ],
+  "homepage": "https://github.com/ember-template-lint/ember-template-recast",
+  "bugs": "https://github.com/ember-template-lint/ember-template-recast/issues",
+  "repository": "github:ember-template-lint/ember-template-recast",
+  "license": "MIT",
+  "author": "Robert Jackson <me@rwjblue.com>",
+  "files": [
+    "bin/",
+    "src/"
+  ],
+  "main": "src/index.js",
+  "bin": "bin/ember-template-recast.js",
+  "scripts": {
+    "changelog": "lerna-changelog",
+    "lint:js": "eslint .",
+    "release": "release-it",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@glimmer/syntax": "^0.62.1",
+    "async-promise-queue": "^1.0.5",
+    "colors": "^1.4.0",
+    "commander": "^6.1.0",
+    "globby": "^11.0.1",
+    "ora": "^5.1.0",
+    "slash": "^3.0.0",
+    "tmp": "^0.2.1",
+    "workerpool": "^6.0.1"
+  },
+  "devDependencies": {
+    "broccoli-test-helper": "^2.0.0",
+    "common-tags": "^1.8.0",
+    "eslint": "^7.10.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "execa": "^4.0.3",
+    "jest": "^26.4.2",
+    "lerna-changelog": "^1.0.1",
+    "prettier": "^2.1.2",
+    "release-it": "^14.0.3",
+    "release-it-lerna-changelog": "^2.4.0"
+  },
+  "engines": {
+    "node": "10.* || >= 12.*"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
+  "changelog": {
+    "repo": "ember-template-lint/ember-template-recast",
+    "labels": {
+      "breaking": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "documentation": ":memo: Documentation",
+      "internal": ":house: Internal"
+    }
+  },
+  "release-it": {
+    "plugins": {
+      "release-it-lerna-changelog": {
+        "infile": "CHANGELOG.md"
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true
+    }
+  }
+}
