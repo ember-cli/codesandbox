@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+if [[ ! -f ~/.bashrc ]]; then
+  exit 0
+fi
+
+if [[ ! -f node_modules/.bin/ember ]]; then
+  exit 0
+fi
+
+if ! $(command -v whoami > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v cat > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v grep > /dev/null 2>&1); then
+  exit 0
+fi
+
+if ! $(command -v npx > /dev/null 2>&1); then
+  exit 0
+fi
+
+if [[ `whoami` != 'sandbox' ]]; then
+  exit 0
+fi
+
+if ! $(cat ~/.bashrc | grep -E "^alias ember" > /dev/null 2>&1); then
+  echo 'alias ember="npx ember"' >> ~/.bashrc
+fi
