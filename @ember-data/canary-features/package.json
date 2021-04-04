@@ -1,0 +1,48 @@
+{
+  "name": "@ember-data/canary-features",
+  "version": "3.25.0",
+  "description": "Canary features",
+  "keywords": [
+    "ember-addon"
+  ],
+  "repository": "",
+  "license": "MIT",
+  "author": "",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {},
+  "dependencies": {
+    "ember-cli-babel": "^7.18.0",
+    "ember-cli-typescript": "^4.0.0"
+  },
+  "devDependencies": {
+    "babel-plugin-debug-macros": "^0.3.3",
+    "babel-plugin-filter-imports": "^4.0.0",
+    "babel6-plugin-strip-class-callcheck": "^6.0.0",
+    "broccoli-file-creator": "^2.1.1",
+    "broccoli-test-helper": "^2.0.0",
+    "calculate-cache-key-for-tree": "^2.0.0",
+    "co": "^4.6.0",
+    "common-tags": "^1.8.0",
+    "ember-cli-blueprint-test-helpers": "^0.19.1",
+    "ember-cli-path-utils": "^1.0.0",
+    "ember-cli-string-utils": "^1.1.0",
+    "ember-cli-version-checker": "^5.1.1",
+    "git-repo-info": "^2.1.1",
+    "glob": "^7.1.6",
+    "mocha": "^7.1.2",
+    "npm-git-info": "^1.0.3",
+    "rimraf": "^3.0.2",
+    "rsvp": "^4.8.5",
+    "silent-error": "^1.1.1"
+  },
+  "engines": {
+    "node": "10.* || >= 12.*"
+  },
+  "volta": {
+    "node": "12.16.2",
+    "yarn": "1.22.4"
+  }
+}

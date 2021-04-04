@@ -1,0 +1,23 @@
+{
+    "name": "@types/broccoli-plugin",
+    "version": "1.3.0",
+    "description": "TypeScript definitions for broccoli-plugin",
+    "license": "MIT",
+    "contributors": [
+        {
+            "name": "Dan Freeman",
+            "url": "https://github.com/dfreeman",
+            "githubUsername": "dfreeman"
+        }
+    ],
+    "main": "",
+    "types": "",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git"
+    },
+    "scripts": {},
+    "dependencies": {},
+    "typesPublisherContentHash": "0d40477754956057f8a11b3ed2dff574dfed53a3672d2649bae635bd683d84ea",
+    "typeScriptVersion": "2.1"
+}

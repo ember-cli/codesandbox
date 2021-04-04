@@ -1,0 +1,47 @@
+{
+  "name": "ember-welcome-page",
+  "version": "4.0.0",
+  "description": "Welcome page for Ember CLI applications",
+  "keywords": [
+    "ember-addon"
+  ],
+  "license": "MIT",
+  "author": "David Baker <acorncom@gmail.com>",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "repository": "https://github.com/ember-cli/ember-welcome-page",
+  "scripts": {
+    "build": "ember build",
+    "changelog": "lerna-changelog",
+    "start": "ember server",
+    "test": "ember try:each"
+  },
+  "dependencies": {
+    "broccoli-funnel": "^2.0.2",
+    "ember-cli-babel": "^7.4.1",
+    "ember-cli-htmlbars": "^3.0.1",
+    "ember-compatibility-helpers": "^1.1.2"
+  },
+  "devDependencies": {
+    "ember-cli": "~3.7.1",
+    "ember-cli-dependency-checker": "^3.0.0",
+    "ember-cli-eslint": "^4.0.0",
+    "ember-cli-htmlbars-inline-precompile": "^2.1.0",
+    "ember-cli-inject-live-reload": "^2.0.1",
+    "ember-cli-qunit": "^4.0.0",
+    "ember-load-initializers": "^2.0.0",
+    "ember-resolver": "^5.0.1",
+    "ember-source": "~3.7.3",
+    "ember-try": "^1.1.0",
+    "lerna-changelog": "^0.8.2",
+    "loader.js": "^4.2.3"
+  },
+  "engines": {
+    "node": "6.* || 8.* || >= 10.*"
+  },
+  "ember-addon": {
+    "configPath": "tests/dummy/config"
+  }
+}
